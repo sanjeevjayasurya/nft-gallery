@@ -1,30 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import NFTCard from "./components/NFTCard";
 import NFTModal from "./components/NFTModal";
-import { ethers } from "ethers";
+import SearchBox from "./components/Searchbox";
+import { useQuery } from "@tanstack/react-query";
 
-function isValidAddress(address) {
-  return ethers.isAddress(address);
-}
+const API_KEY = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
+const baseUrl = `https://eth-mainnet.alchemyapi.io/v2/${API_KEY}/getNFTs/`;
 
 export default function NFTs() {
   const [walletAddress, setWalletAddress] = useState("");
-  const [nFTs, setNFTs] = useState([]);
   const [selectedNFT, setSelectedNFT] = useState(null);
-  const API_KEY = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
 
   const fetchNFTs = async () => {
-    let nfts;
-    const baseURL = `https://eth-mainnet.alchemyapi.io/v2/${API_KEY}/getNFTs/`;
+    const fetchURL = `${baseUrl}?owner=${walletAddress}`;
     const requestOptions = {
-      method: "GET",
+      method: "GET"
     };
-    const fetchURL = `${baseURL}?owner=${walletAddress}`;
-    nfts = await fetch(fetchURL, requestOptions).then((data) => data.json());
-    setNFTs(nfts);
-    console.log(nFTs);
+    const getNFTs = await fetch(fetchURL, requestOptions).then((data) =>
+      data.json()
+    );
+    return getNFTs;
   };
+
+  const nftData = useQuery(["fetchNFTs"], fetchNFTs, {
+    enabled: false,
+    refetchOnWindowFocus: false,
+    retry: false,
+    cacheTime: 0,
+  });
 
   const handleNFTClick = (nft) => {
     setSelectedNFT(nft);
@@ -41,30 +45,27 @@ export default function NFTs() {
         <meta name="description" content={`NFTs owned by ${walletAddress}`} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <div className="container mx-auto">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (isValidAddress(walletAddress)) fetchNFTs();
-            else console.log("Invalid address");
-          }}
-        >
-          <input
-            value={walletAddress}
-            onChange={(e) => setWalletAddress(e.target.value)}
-          />
-          <input type="submit" value="Submit" />
-        </form>
-
+        <SearchBox
+          walletAddress={walletAddress}
+          setWalletAddress={setWalletAddress}
+          fetchNFT={nftData}
+        />
+        {nftData.isInitialLoading && <div>Loading ... </div>}
         <h1 className="text-2xl font-bold mb-8">NFTs for {walletAddress}</h1>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {nFTs?.ownedNfts?.map((nft) => (
-            <NFTCard key={nft.id} nft={nft} onClick={handleNFTClick} />
-          ))}
+          {nftData?.data?.ownedNfts.length !== 0 ? (
+            nftData?.data?.ownedNfts?.map((nft) => (
+              <NFTCard
+                key={nft.id.tokenId}
+                nft={nft}
+                onClick={handleNFTClick}
+              />
+            ))
+          ) : (
+            <div>No NFT found</div>
+          )}
         </div>
-
         {selectedNFT && (
           <NFTModal nft={selectedNFT} onClose={handleCloseModal} />
         )}
