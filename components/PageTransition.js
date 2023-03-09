@@ -6,17 +6,14 @@ const PageTransition = ({ children }) => {
   const variants = {
     out: {
       opacity: 0,
-      y: 40,
       transition: {
         duration: 0.75,
       },
     },
     in: {
       opacity: 1,
-      y: 0,
       transition: {
         duration: 0.75,
-        delay: 0.5,
       },
     },
   };
@@ -29,7 +26,7 @@ const PageTransition = ({ children }) => {
           variants={variants}
           animate="in"
           initial="out"
-          exit="out"
+          // exit="out"
         >
           {children}
         </motion.div>
