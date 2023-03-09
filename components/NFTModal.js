@@ -66,7 +66,9 @@ export default function NFTModal({ showModal, setShowModal, nft }) {
 
                         <section className="mt-3">
                           <p className="text-2xl text-gray-900">
-                            {nft.contractMetadata.openSea.floorPrice} ETH
+                            {nft.contractMetadata.openSea.floorPrice
+                              ? `${nft.contractMetadata.openSea.floorPrice} ETH`
+                              : "No floor price available"}
                           </p>
                           <div className="mt-3"></div>
                           <div className="mt-6">
