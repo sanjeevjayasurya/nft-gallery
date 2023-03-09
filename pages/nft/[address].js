@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
-import NFTCard from "../components/NFTCard";
+import NFTCard from "../../components/NFTCard";
 import { AlchemyProvider } from "../../utils/AlchemyProvider";
 const products = [
   {
@@ -32,7 +32,7 @@ const products = [
   // More products...
 ];
 
-export default function AddressPage({ nfts, ensName }) {
+export default function AddressPage({ nfts = null, ensName = null }) {
   const router = useRouter();
   const { address } = router.query;
   console.log(ensName);
@@ -55,7 +55,7 @@ export async function getServerSideProps(context) {
   const API_KEY = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
   const BASE_URL = `https://eth-mainnet.alchemyapi.io/v2/${API_KEY}/getNFTs/`;
   const response = await fetch(`${BASE_URL}?owner=${address}`);
-  const walletAddress = await AlchemyProvider.resolveName(address)
+  const walletAddress = await AlchemyProvider.resolveName(address);
   const ensName = await AlchemyProvider.lookupAddress(address);
   const data = await response.json();
   const nfts = data.ownedNfts;

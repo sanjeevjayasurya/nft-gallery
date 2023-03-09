@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import NFTCard from "./components/NFTCard";
-import NFTModal from "./components/NFTModal";
-import SearchBox from "./components/Searchbox";
+import NFTCard from "../components/NFTCard";
+import NFTModal from "../components/NFTModal";
+import SearchBox from "../components/Searchbox";
 import { useQuery } from "@tanstack/react-query";
 
 const API_KEY = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
