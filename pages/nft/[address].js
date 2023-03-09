@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import NFTCard from "../../components/NFTCard";
 import { AlchemyProvider } from "../../utils/AlchemyProvider";
+import SearchBox from "../../components/Searchbox";
 const products = [
   {
     id: 1,
@@ -35,9 +36,8 @@ const products = [
 export default function AddressPage({ nfts = null, ensName = null }) {
   const router = useRouter();
   const { address } = router.query;
-  console.log(ensName);
   return (
-    <div className="pt-32">
+    <div className="pt-16">
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Products</h2>
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">

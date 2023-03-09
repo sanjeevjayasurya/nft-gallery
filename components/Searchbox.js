@@ -156,6 +156,8 @@ export default function SearchBox({
             <input
               type="text"
               id="eth-address"
+              pattern={/^[a-zA-Z0-9.]*$/}
+              title="Please remove unnecessary spaces"
               className="block w-full rounded-none rounded-l-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               placeholder="Enter your wallet address"
               value={walletAddress}

@@ -23,7 +23,7 @@ const PageTransition = ({ children }) => {
 
   return (
     <div className="effect-1">
-      <AnimatePresence initial={false} mode="wait">
+      <AnimatePresence initial={true} mode="wait">
         <motion.div
           key={asPath}
           variants={variants}
