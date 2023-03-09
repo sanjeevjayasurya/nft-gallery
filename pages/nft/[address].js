@@ -1,49 +1,26 @@
-import { useState, useEffect } from "react";
-import { ethers } from "ethers";
-import { useRouter } from "next/router";
 import NFTCard from "../../components/NFTCard";
-import { AlchemyProvider } from "../../utils/AlchemyProvider";
-import SearchBox from "../../components/Searchbox";
-const products = [
-  {
-    id: 1,
-    name: "Basic Tee 8-Pack",
-    href: "#",
-    price: "$256",
-    description:
-      "Get the full lineup of our Basic Tees. Have a fresh shirt all week, and an extra for laundry day.",
-    options: "8 colors",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-01.jpg",
-    imageAlt:
-      "Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.",
-  },
-  {
-    id: 2,
-    name: "Basic Tee",
-    href: "#",
-    price: "$32",
-    description:
-      "Look like a visionary CEO and wear the same black t-shirt every day.",
-    options: "Black",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-02.jpg",
-    imageAlt: "Front of plain black t-shirt.",
-  },
-  // More products...
-];
+import EmptyState from "../../components/EmptyState";
+import Link from "next/link";
 
 export default function AddressPage({ nfts = null, ensName = null }) {
-  const router = useRouter();
-  const { address } = router.query;
   return (
     <div className="pt-16">
+      <Link
+        href="/"
+        className="float-right items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+      >
+        <span aria-hidden="true">&larr;</span> Go home
+      </Link>
       <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-7xl">
-        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
-          {nfts.map((nft) => (
-            <NFTCard key={nft?.id?.token} nft={nft} />
-          ))}
-        </div>
+        {nfts.length !== 0 ? (
+          <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
+            {nfts.map((nft) => (
+              <NFTCard key={nft?.id?.token} nft={nft} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState />
+        )}
       </div>
     </div>
   );
