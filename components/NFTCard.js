@@ -42,9 +42,9 @@ export default function NFTCard({ nft }) {
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center">
-              <span className="bg-white px-2 text-gray-500">
+              {/* <span className="bg-white px-2 text-gray-500">
                 <img className="h-5 w-5" src="/images/ethereum.svg" />
-              </span>
+              </span> */}
             </div>
             {/* <div className="block">
               <img
