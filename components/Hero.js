@@ -8,11 +8,11 @@ export default function Hero({ walletAddress, setWalletAddress }) {
           Discover Your Digital Wealth with Crypto Canvas
         </h1>
         <p className="mt-6 text-base leading-8 text-gray-600">
-          Introducing Crypto Canvas - the ultimate platform to showcase your
-          NFTs linked to your wallet address. Our platform provides a secure and
+          Introducing NFT Canvas - a platform to showcase your
+          NFTs linked to your wallet address. Our platform provides a
           transparent way to manage and track your digital assets while
-          elegantly displaying your collection. Whether you&apos;re a crypto
-          enthusiast or seasoned collector, Crypto Canvas has got you covered.
+          displaying your collection. Whether you&apos;re a crypto
+          enthusiast or seasoned collector, NFT Canvas has got you covered.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <SearchBox

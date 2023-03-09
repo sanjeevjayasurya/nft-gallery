@@ -20,9 +20,9 @@ export default function NFTCard({ nft }) {
           />
         </div>
         <div className="group-hover:bg-slate-100 flex flex-1 flex-col space-y-2 p-4">
-          <h3 className="text-sm font-medium text-gray-900">
+          <h3 className="text-base font-bold text-gray-900">
             <div>
-              <span aria-hidden="true" className="absolute inset-0" />
+              <span aria-hidden="true" className=" absolute inset-0" />
               {nft.title}
             </div>
           </h3>

@@ -21,7 +21,7 @@ export const generateImageUrl = (url = "none://none") => {
               src = "https://ipfs.io/" + originUrl[1];
               break;
             default:
-              src = "/images/error.png";
+              src = "/images/error.jpeg";
               break;
           }
         } else {
@@ -29,7 +29,7 @@ export const generateImageUrl = (url = "none://none") => {
         }
       } catch (err) {
         console.error(err.message, "Render Url:", url);
-        src = "/images/error.png";
+        src = "/images/error.jpeg";
       }
     }
     return src;

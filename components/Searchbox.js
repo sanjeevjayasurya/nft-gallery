@@ -27,7 +27,6 @@ async function isValidAddress(
   const alphaRegex =
     /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
   if (alphaRegex.test(address)) {
-    console.log("alpha tegex");
     try {
       isValid = await provider.resolveName(address);
       if (isValid) {
@@ -46,7 +45,6 @@ async function isValidAddress(
     }
   }
   if (hexRegex.test(address)) {
-    console.log("reached hex Regex");
     isValid = await checkHexAddress(address);
     if (isValid) {
       setIsLoading(false);
@@ -57,18 +55,8 @@ async function isValidAddress(
       setError(true);
       return false;
     }
-    // const validHexAddress = console.log(validHexAddress);
-    // return new Promise((resolve) =>
-    //   setTimeout(() => {
-    //     setIsLoading(false);
-    //     setError(!validHexAddress);
-    //     console.log("This is validHexAddress >> ", validHexAddress);
-    //     return validHexAddress;
-    //   }, 2000)
-    // );
   } else {
     setIsLoading(false);
-    console.log("reaching here");
     return false;
   }
 }
@@ -119,8 +107,6 @@ export default function SearchBox({
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          //   setIsLoading(true);
-          //   console.log(await isValidAddress(walletAddress, setIsLoading, setError))
           const walletAddressTrimmed = walletAddress.trim()
           const isValid = await isValidAddress(
             walletAddressTrimmed,
@@ -130,12 +116,8 @@ export default function SearchBox({
           if (isValid) {
             router.push(`nft/${walletAddressTrimmed}`, null, { shallow: true });
             console.log("valid address");
-            // fetchNFT.refetch();
-            // setError(false);
           } else {
-            console.log("invalid address");
-            // queryClient.resetQueries();
-            // setError(true);
+            console.log("invalid address");          
           }
         }}
       >
@@ -171,8 +153,7 @@ export default function SearchBox({
           <button
             disabled={walletAddress.length === 0}
             type="submit"
-            //   className="relative -ml-px rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            className="disabled:bg-indigo-500 relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-white bg-indigo-600 ring-1 ring-inset ring-black hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="disabled:bg-gray-400 disabled:text-[#000000] relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-white bg-indigo-600 ring-1 ring-inset ring-black hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             {isLoading ? (
               <>

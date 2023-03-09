@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const Media = ({ url }) => {
-    console.log(url)
   const [fileType, setFileType] = useState('');
   const [fileURL, setFileURL] = useState('');
   const [isLoading, setIsLoading] = useState(false);

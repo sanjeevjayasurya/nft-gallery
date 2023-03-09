@@ -71,7 +71,7 @@ export default function NFTModal({ showModal, setShowModal, nft }) {
                           <div className="mt-3"></div>
                           <div className="mt-6">
                             <p className="text-sm text-gray-700">
-                              {nft.description
+                              <span className="font-bold">Description: </span>{nft.description
                                 ? nft.description
                                 : "No description provided"}
                             </p>
