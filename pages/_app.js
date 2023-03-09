@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Layout from "./components/layout";
 import { AnimatePresence } from "framer-motion";
-import Transition from "./components/Transition";
+import PageTransition from "./components/PageTransition";
 
 import "../styles/globals.css";
 
@@ -11,9 +11,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Layout>
-        <Transition>
+        <PageTransition>
           <Component {...pageProps} />
-        </Transition>
+        </PageTransition>
       </Layout>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

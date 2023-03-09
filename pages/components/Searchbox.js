@@ -10,7 +10,7 @@ function wait(milliseconds) {
 }
 
 async function checkHexAddress(address) {
-  await wait(3000);
+  await wait(1000);
   return ethers.isAddress(address);
 }
 

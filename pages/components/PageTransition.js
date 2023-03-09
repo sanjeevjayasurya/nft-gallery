@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 
-const Transition = ({ children }) => {
+const PageTransition = ({ children }) => {
   const { asPath } = useRouter();
   const variants = {
     out: {
@@ -38,4 +38,4 @@ const Transition = ({ children }) => {
   );
 };
 
-export default Transition;
+export default PageTransition;
