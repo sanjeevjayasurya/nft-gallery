@@ -61,7 +61,7 @@ export default function NFTModal({ showModal, setShowModal, nft }) {
                     <div className="flex flex-col self-stretch justify-between sm:col-span-8 lg:col-span-7">
                       <div>
                         <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">
-                          {nft.title}
+                          {nft.title ? nft.title : "No title provided"}
                         </h2>
 
                         <section className="mt-3">
@@ -71,7 +71,8 @@ export default function NFTModal({ showModal, setShowModal, nft }) {
                           <div className="mt-3"></div>
                           <div className="mt-6">
                             <p className="text-sm text-gray-700">
-                              <span className="font-bold">Description: </span>{nft.description
+                              <span className="font-bold">Description: </span>
+                              {nft.description
                                 ? nft.description
                                 : "No description provided"}
                             </p>

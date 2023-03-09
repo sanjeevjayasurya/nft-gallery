@@ -4,6 +4,7 @@ import { imgError } from "../utils/imgError";
 import NFTModal from "./NFTModal";
 
 export default function NFTCard({ nft }) {
+  console.log(nft);
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -23,7 +24,7 @@ export default function NFTCard({ nft }) {
           <h3 className="text-base font-bold text-gray-900">
             <div>
               <span aria-hidden="true" className=" absolute inset-0" />
-              {nft.title}
+              {nft.title ? nft.title : 'No title provided'}
             </div>
           </h3>
           {/* <p className="text-sm text-gray-500">{nft.description}</p> */}
@@ -31,7 +32,9 @@ export default function NFTCard({ nft }) {
             {/* <p className="text-sm italic text-gray-500">{product.options}</p> */}
             <p className="text-base font-medium text-gray-900">
               <span className="font-bold">Floor price: </span>
-              {nft.contractMetadata.openSea.floorPrice} ETH
+              {nft.contractMetadata.openSea.floorPrice
+                ? `${nft.contractMetadata.openSea.floorPrice} ETH`
+                : "No floor price available"}
             </p>
           </div>
           <div className="relative">
