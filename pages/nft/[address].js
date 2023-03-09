@@ -55,12 +55,12 @@ export async function getServerSideProps(context) {
   const API_KEY = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
   const BASE_URL = `https://eth-mainnet.alchemyapi.io/v2/${API_KEY}/getNFTs/`;
   const response = await fetch(`${BASE_URL}?owner=${address}`);
-  const walletAddress = await AlchemyProvider.resolveName(address);
-  const ensName = await AlchemyProvider.lookupAddress(address);
+  // const walletAddress = await AlchemyProvider.resolveName(address);
+  // const ensName = await AlchemyProvider.lookupAddress(address);
   const data = await response.json();
   const nfts = data.ownedNfts;
 
   return {
-    props: { nfts, ensName, walletAddress },
+    props: { nfts },
   };
 }

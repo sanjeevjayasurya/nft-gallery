@@ -14,7 +14,12 @@ async function checkHexAddress(address) {
   return ethers.isAddress(address);
 }
 
-async function isValidAddress(address, setIsLoading, setError) {
+async function isValidAddress(
+  address,
+  setIsLoading,
+  setError,
+  setWalletAddress
+) {
   setIsLoading(true);
   let isValid;
   const provider = new ethers.AlchemyProvider("homestead", API_KEY);
