@@ -1,354 +1,13 @@
-// import { useState } from "react";
-// import Media from "./Media";
 import { Fragment, useState } from "react";
 import { Dialog, RadioGroup, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { generateImageUrl } from "../utils/generateImageurl";
-// function NFTCard({ nft }) {
-//   console.log(nft);
-//   const { title, description, image_url, image } = nft;
-//   const generateImageUrl = (url) => {
-//     let src = null;
-//     if (url) {
-//       try {
-//         if (typeof url !== "string") {
-//           url = url.toString();
-//         }
-//         if (url.startsWith("data:")) {
-//           return url;
-//         }
-//         const originUrl = url.split("//");
-//         if (originUrl?.length === 2) {
-//           switch (originUrl[0].toLowerCase()) {
-//             case "http:":
-//               src = url;
-//               break;
-//             case "https:":
-//               src = url;
-//               break;
-//             case "ipfs:":
-//               src = "https://ipfs.io/ipfs/" + originUrl[1];
-//               break;
-//             default:
-//               src = null;
-//               break;
-//           }
-//         } else {
-//           src = "https://ipfs.io/ipfs/" + url;
-//         }
-//       } catch (err) {
-//         console.error(err.message, "Render Url:", url);
-//         src = null;
-//       }
-//     }
-//     return src;
-//   };
-//   const data = {
-//     ownedNfts: [
-//       {
-//         contract: {
-//           address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
-//         },
-//         id: {
-//           tokenId:
-//             "0xee528288619f93b2f84b4159595ae24f71de6e6f12a1f939502e5f84011b60fa",
-//           tokenMetadata: {
-//             tokenType: "ERC721",
-//           },
-//         },
-//         balance: "1",
-//         title: "chinyasuhail.eth",
-//         description: "chinyasuhail.eth, an ENS name.",
-//         tokenUri: {
-//           gateway:
-//             "https://metadata.ens.domains/mainnet/0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85/0xee528288619f93b2f84b4159595ae24f71de6e6f12a1f939502e5f84011b60fa",
-//           raw: "https://metadata.ens.domains/mainnet/0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85/0xee528288619f93b2f84b4159595ae24f71de6e6f12a1f939502e5f84011b60fa",
-//         },
-//         media: [
-//           {
-//             gateway:
-//               "https://nft-cdn.alchemy.com/eth-mainnet/c0d5271f54281534eb1f989d914f8280",
-//             thumbnail:
-//               "https://res.cloudinary.com/alchemyapi/image/upload/thumbnailv2/eth-mainnet/c0d5271f54281534eb1f989d914f8280",
-//             raw: "https://metadata.ens.domains/mainnet/0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85/0xee528288619f93b2f84b4159595ae24f71de6e6f12a1f939502e5f84011b60fa/image",
-//             format: "svg+xml",
-//             bytes: 101097,
-//           },
-//         ],
-//         metadata: {
-//           background_image:
-//             "https://metadata.ens.domains/mainnet/avatar/chinyasuhail.eth",
-//           image:
-//             "https://metadata.ens.domains/mainnet/0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85/0xee528288619f93b2f84b4159595ae24f71de6e6f12a1f939502e5f84011b60fa/image",
-//           is_normalized: true,
-//           segment_length: 12,
-//           image_url:
-//             "https://metadata.ens.domains/mainnet/0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85/0xee528288619f93b2f84b4159595ae24f71de6e6f12a1f939502e5f84011b60fa/image",
-//           name: "chinyasuhail.eth",
-//           description: "chinyasuhail.eth, an ENS name.",
-//           attributes: [
-//             {
-//               display_type: "date",
-//               value: 1622913075000,
-//               trait_type: "Created Date",
-//             },
-//             {
-//               display_type: "number",
-//               value: 12,
-//               trait_type: "Length",
-//             },
-//             {
-//               display_type: "number",
-//               value: 12,
-//               trait_type: "Segment Length",
-//             },
-//             {
-//               display_type: "string",
-//               value: "letter",
-//               trait_type: "Character Set",
-//             },
-//             {
-//               display_type: "date",
-//               value: 1622913075000,
-//               trait_type: "Registration Date",
-//             },
-//             {
-//               display_type: "date",
-//               value: 1780697835000,
-//               trait_type: "Expiration Date",
-//             },
-//           ],
-//           name_length: 12,
-//           version: 0,
-//           url: "https://app.ens.domains/name/chinyasuhail.eth",
-//         },
-//         timeLastUpdated: "2023-03-03T06:53:23.906Z",
-//         contractMetadata: {
-//           tokenType: "ERC721",
-//           contractDeployer: "0x4fe4e666be5752f1fdd210f4ab5de2cc26e3e0e8",
-//           deployedBlockNumber: 9380410,
-//           openSea: {
-//             floorPrice: 0.00076315768,
-//             collectionName: "ENS: Ethereum Name Service",
-//             safelistRequestStatus: "verified",
-//             imageUrl:
-//               "https://i.seadn.io/gae/0cOqWoYA7xL9CkUjGlxsjreSYBdrUBE0c6EO1COG4XE8UeP-Z30ckqUNiL872zHQHQU5MUNMNhfDpyXIP17hRSC5HQ?w=500&auto=format",
-//             description:
-//               "Ethereum Name Service (ENS) domains are secure domain names for the decentralized world. ENS domains provide a way for users to map human readable names to blockchain and non-blockchain resources, like Ethereum addresses, IPFS hashes, or website URLs. ENS domains can be bought and sold on secondary markets.",
-//             externalUrl: "https://ens.domains",
-//             twitterUsername: "ensdomains",
-//             lastIngestedAt: "2023-03-06T19:03:54.000Z",
-//           },
-//         },
-//       },
-//       {
-//         contract: {
-//           address: "0xfa932d5cbbdc8f6ed6d96cc6513153afa9b7487c",
-//         },
-//         id: {
-//           tokenId:
-//             "0x0000000000000000000000000000000000000000000000000000000000000d70",
-//           tokenMetadata: {
-//             tokenType: "ERC721",
-//           },
-//         },
-//         balance: "1",
-//         title: "Subject To Change Without Notice",
-//         description:
-//           "Tunes are imaginative song titles generated by AI. Audio, cover art, artist name, and other functionalities are intentionally omitted for others to interpret and create. Feel free to use a Tune in any way you want.",
-//         tokenUri: {
-//           gateway:
-//             "https://alchemy.mypinata.cloud/ipfs/QmSTj62dobkFt62cxUJXtVYTXTwcTD3i4SVhfwJuWpt1SK/3440",
-//           raw: "ipfs://QmSTj62dobkFt62cxUJXtVYTXTwcTD3i4SVhfwJuWpt1SK/3440",
-//         },
-//         media: [
-//           {
-//             gateway:
-//               "https://nft-cdn.alchemy.com/eth-mainnet/421b2eba46de90dfd5c1279ddcde6224",
-//             thumbnail:
-//               "https://res.cloudinary.com/alchemyapi/image/upload/thumbnailv2/eth-mainnet/421b2eba46de90dfd5c1279ddcde6224",
-//             raw: "ipfs://Qme2g6Rq3ytangS7HsFYPQckN9dngBzmSRVB3UQGL1ZA72/3440.png",
-//             format: "png",
-//             bytes: 22344,
-//           },
-//         ],
-//         metadata: {
-//           name: "Subject To Change Without Notice",
-//           description:
-//             "Tunes are imaginative song titles generated by AI. Audio, cover art, artist name, and other functionalities are intentionally omitted for others to interpret and create. Feel free to use a Tune in any way you want.",
-//           image:
-//             "ipfs://Qme2g6Rq3ytangS7HsFYPQckN9dngBzmSRVB3UQGL1ZA72/3440.png",
-//         },
-//         timeLastUpdated: "2023-02-23T03:37:53.838Z",
-//         contractMetadata: {
-//           name: "Tunes",
-//           symbol: "TUNE",
-//           totalSupply: "5000",
-//           tokenType: "ERC721",
-//           contractDeployer: "0xf7ef3eef260369732a137750bcd8d7716cae6d27",
-//           deployedBlockNumber: 13183642,
-//           openSea: {
-//             floorPrice: 0.039,
-//             collectionName: "Tunes Project",
-//             safelistRequestStatus: "verified",
-//             imageUrl:
-//               "https://i.seadn.io/gae/Nb-AyBcWvFIx4ca8om3GE1innjt59zcTPOIWm67zqaRTjGScBpu2-LFpHp92OISFbtM1Df_N-pcwUlA4x0iMOh8C8ZYvtScd6yWy?w=500&auto=format",
-//             description:
-//               "Tunes are imaginative song titles generated by AI. Audio, cover art, artist name, and other functionality are intentionally omitted for others to interpret and create. Feel free to use a Tune in any way you want.\n\n[Upload a Song](https://songs.tunesproject.org)｜[Listen to Songs](https://opensea.io/collection/songs-for-tunes)｜[Join Discord](https://discord.com/invite/S7tq8bUkAR)｜[Follow on Twitter](https://twitter.com/tunesproject)",
-//             externalUrl: "http://tunesproject.org",
-//             twitterUsername: "tunesproject",
-//             discordUrl: "https://discord.gg/S7tq8bUkAR",
-//             lastIngestedAt: "2023-02-27T03:57:40.000Z",
-//           },
-//         },
-//       },
-//       {
-//         contract: {
-//           address: "0xfa932d5cbbdc8f6ed6d96cc6513153afa9b7487c",
-//         },
-//         id: {
-//           tokenId:
-//             "0x0000000000000000000000000000000000000000000000000000000000000f3d",
-//           tokenMetadata: {
-//             tokenType: "ERC721",
-//           },
-//         },
-//         balance: "1",
-//         title: "Break Your Keyboards",
-//         description:
-//           "Tunes are imaginative song titles generated by AI. Audio, cover art, artist name, and other functionalities are intentionally omitted for others to interpret and create. Feel free to use a Tune in any way you want.",
-//         tokenUri: {
-//           gateway:
-//             "https://alchemy.mypinata.cloud/ipfs/QmSTj62dobkFt62cxUJXtVYTXTwcTD3i4SVhfwJuWpt1SK/3901",
-//           raw: "ipfs://QmSTj62dobkFt62cxUJXtVYTXTwcTD3i4SVhfwJuWpt1SK/3901",
-//         },
-//         media: [
-//           {
-//             gateway:
-//               "https://nft-cdn.alchemy.com/eth-mainnet/b1cbd26d6e5e9480b84a7fb9a0e53434",
-//             thumbnail:
-//               "https://res.cloudinary.com/alchemyapi/image/upload/thumbnailv2/eth-mainnet/b1cbd26d6e5e9480b84a7fb9a0e53434",
-//             raw: "ipfs://Qme2g6Rq3ytangS7HsFYPQckN9dngBzmSRVB3UQGL1ZA72/3901.png",
-//             format: "png",
-//             bytes: 18116,
-//           },
-//         ],
-//         metadata: {
-//           name: "Break Your Keyboards",
-//           description:
-//             "Tunes are imaginative song titles generated by AI. Audio, cover art, artist name, and other functionalities are intentionally omitted for others to interpret and create. Feel free to use a Tune in any way you want.",
-//           image:
-//             "ipfs://Qme2g6Rq3ytangS7HsFYPQckN9dngBzmSRVB3UQGL1ZA72/3901.png",
-//         },
-//         timeLastUpdated: "2023-02-23T03:37:54.240Z",
-//         contractMetadata: {
-//           name: "Tunes",
-//           symbol: "TUNE",
-//           totalSupply: "5000",
-//           tokenType: "ERC721",
-//           contractDeployer: "0xf7ef3eef260369732a137750bcd8d7716cae6d27",
-//           deployedBlockNumber: 13183642,
-//           openSea: {
-//             floorPrice: 0.039,
-//             collectionName: "Tunes Project",
-//             safelistRequestStatus: "verified",
-//             imageUrl:
-//               "https://i.seadn.io/gae/Nb-AyBcWvFIx4ca8om3GE1innjt59zcTPOIWm67zqaRTjGScBpu2-LFpHp92OISFbtM1Df_N-pcwUlA4x0iMOh8C8ZYvtScd6yWy?w=500&auto=format",
-//             description:
-//               "Tunes are imaginative song titles generated by AI. Audio, cover art, artist name, and other functionality are intentionally omitted for others to interpret and create. Feel free to use a Tune in any way you want.\n\n[Upload a Song](https://songs.tunesproject.org)｜[Listen to Songs](https://opensea.io/collection/songs-for-tunes)｜[Join Discord](https://discord.com/invite/S7tq8bUkAR)｜[Follow on Twitter](https://twitter.com/tunesproject)",
-//             externalUrl: "http://tunesproject.org",
-//             twitterUsername: "tunesproject",
-//             discordUrl: "https://discord.gg/S7tq8bUkAR",
-//             lastIngestedAt: "2023-02-27T03:57:40.000Z",
-//           },
-//         },
-//       },
-//     ],
-//     totalCount: 3,
-//     blockHash:
-//       "0x8f2f3c5f5efbf6b83cee49329dd953aff8d8a30b1ba75136377ca78876211e2d",
-//   };
-//   const [showModal, setShowModal] = useState(false);
-//   const handlePurchase = () => {
-//     const tokenIdInDecimals = BigInt(nft?.id?.tokenId).toString();
-//     const openseaLink = `https://opensea.io/assets/ethereum/${nft?.contract?.address}/${tokenIdInDecimals}`;
-//     window.open(openseaLink, "_blank");
-//   };
+import { imgError } from "../utils/imgError";
 
-//   // const convertIpfsToHttpsUrl = (url) => {
-//   //   return `https://ipfs.io/ipfs/${url?.substring(6)}`;
-//   // };
-
-//   return (
-//     <>
-//       <div
-//         className="bg-white rounded-lg shadow-lg overflow-hidden"
-//         onClick={() => setShowModal(true)}
-//       >
-//         <img
-//           onError={({ currentTarget }) => {
-//             console.log("This is error", currentTarget.error);
-//             currentTarget.onerror = null;
-//             currentTarget.src = "/images/error.webp";
-//           }}
-//           src={generateImageUrl(nft.metadata.image)}
-//           alt={nft.name}
-//           className="w-full h-40 object-scale-down"
-//         />
-//         {/* <Media url={convertIpfsToHttpsUrl(nft.media[0].raw)} /> */}
-//         <div className="p-4">
-//           <h2 className="text-lg font-medium text-gray-900">{nft.title}</h2>
-//           <p className="mt-2 text-gray-600">{nft.description}</p>
-//         </div>
-//       </div>
-
-//       {showModal && (
-//         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-gray-900 bg-opacity-50">
-//           <div className="bg-white rounded-lg overflow-hidden relative">
-//             <button
-//               className="absolute top-0 right-0"
-//               onClick={() => setShowModal(false)}
-//             >
-//               Close
-//             </button>
-//             <img
-//               onError={({ currentTarget }) => {
-//                 currentTarget.onerror = null;
-//                 currentTarget.src = "/images/error.webp";
-//               }}
-//               src={nft.metadata.image}
-//               alt={nft.name}
-//               className="w-full h-80 object-contain"
-//             />
-//             <div className="p-4">
-//               <h2 className="text-lg font-medium text-gray-900">{nft.name}</h2>
-//               <p className="mt-2 text-gray-600">{nft.description}</p>
-//               <p className="mt-2 text-gray-600">Owner: {nft.owner}</p>
-//               <button
-//                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-//                 onClick={handlePurchase}
-//               >
-//                 Purchase on OpenSea
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   );
-// }
-
-// export default NFTCard;
-
-export default function Example({ nft }) {
+export default function NFTCard({ nft }) {
   console.log(nft);
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
   const [showModal, setShowModal] = useState(false);
-  
-
   const handlePurchase = () => {
     const tokenIdInDecimals = BigInt(nft?.id?.tokenId).toString();
     const openseaLink = `https://opensea.io/assets/ethereum/${nft?.contract?.address}/${tokenIdInDecimals}`;
@@ -364,10 +23,7 @@ export default function Example({ nft }) {
         <div className="aspect-w-3 aspect-h-4 bg-gray-200 sm:aspect-none sm:h-96 overflow-hidden">
           <img
             src={generateImageUrl(nft.metadata.image)}
-            onError={({ currentTarget }) => {
-              currentTarget.onerror = null;
-              currentTarget.src = "/images/error.png";
-            }}
+            onError={imgError}
             alt={nft.metadata.name}
             className="transition duration-350 h-full w-full object-cover object-center group-hover:scale-[1.15] sm:h-full sm:w-full overflow-hidden"
           />
@@ -386,6 +42,37 @@ export default function Example({ nft }) {
               <span className="font-bold">Floor price: </span>
               {nft.contractMetadata.openSea.floorPrice} ETH
             </p>
+          </div>
+          <div className="relative">
+            <div
+              className="absolute inset-0 flex items-center"
+              aria-hidden="true"
+            >
+              <div className="w-full border-t border-gray-300" />
+            </div>
+            <div className="relative flex justify-center">
+              <span className="bg-white px-2 text-gray-500">
+                <img className="h-5 w-5" src="/images/ethereum.svg" />
+              </span>
+            </div>
+            {/* <div className="block">
+              <img
+                className="inline-block h-6 w-6 rounded-full"
+                src={nft.contractMetadata.openSea.imageUrl}
+                alt="avatar"
+              />
+            </div> */}
+          </div>
+          <div className="flex items-center">
+            <img
+              className="inline-block h-6 w-6 rounded-full"
+              onError={imgError}
+              src={generateImageUrl(nft?.contractMetadata?.openSea?.imageUrl)}
+              alt=""
+            />
+            <span className="text-sm font-semibold ml-2">
+              {nft?.contractMetadata?.openSea?.collectionName}
+            </span>
           </div>
         </div>
       </div>
@@ -431,6 +118,7 @@ export default function Example({ nft }) {
                           <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-100">
                             <img
                               src={generateImageUrl(nft.metadata.image)}
+                              onError={imgError}
                               alt={nft.metadata.name}
                               className="object-cover object-center"
                             />
@@ -481,18 +169,15 @@ export default function Example({ nft }) {
                               <h4 className="sr-only">Description</h4>
 
                               <p className="text-sm text-gray-700">
-                                {nft.description}
+                                {nft.description
+                                  ? nft.description
+                                  : "No description provided"}
                               </p>
                             </div>
                           </section>
 
-                          <section
-                            aria-labelledby="options-heading"
-                            className="mt-6"
-                          >
-                            <h3 id="options-heading" className="sr-only">
-                              Product options
-                            </h3>
+                          <section className="mt-6">
+                            <h3 className="sr-only"></h3>
 
                             <form>
                               {/* Colors */}
