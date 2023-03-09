@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import NFTCard from "../components/NFTCard";
-import { AlchemyProvider } from "../utils/AlchemyProvider";
+import { AlchemyProvider } from "../../utils/AlchemyProvider";
 const products = [
   {
     id: 1,

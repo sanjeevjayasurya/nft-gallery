@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import { Dialog, RadioGroup, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/20/solid";
-import { generateImageUrl } from "../utils/generateImageurl";
+import { generateImageUrl } from "../../utils/generateImageurl";
 // function NFTCard({ nft }) {
 //   console.log(nft);
 //   const { title, description, image_url, image } = nft;
