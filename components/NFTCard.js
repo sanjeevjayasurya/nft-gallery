@@ -366,7 +366,7 @@ export default function Example({ nft }) {
             src={generateImageUrl(nft.metadata.image)}
             onError={({ currentTarget }) => {
               currentTarget.onerror = null;
-              currentTarget.src = "/images/error.webp";
+              currentTarget.src = "/images/error.png";
             }}
             alt={nft.metadata.name}
             className="transition duration-350 h-full w-full object-cover object-center group-hover:scale-[1.15] sm:h-full sm:w-full overflow-hidden"
